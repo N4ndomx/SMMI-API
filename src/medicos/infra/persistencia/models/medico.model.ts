@@ -1,3 +1,4 @@
+import { EspecialidadModel } from 'src/especialidades/infra/persistencia/models/especialidades.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import {
   Column,
@@ -25,7 +26,7 @@ export class MedicoModel {
   @JoinColumn({ name: 'idEmpleado' })
   empleado: EmpleadoModel;
 
-  // @ManyToMany(() => CatalogoEspecialidades)
-  // @JoinTable()
-  // especialidades: CatalogoEspecialidades[]
+  @ManyToMany(() => EspecialidadModel)
+  @JoinTable({ name: "especialidad_medicos", })
+  especialidades: EspecialidadModel[]
 }

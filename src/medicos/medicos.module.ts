@@ -8,14 +8,12 @@ import { MedicoRepository } from './infra/persistencia/medicos-repository.typeor
 import { MedicoMapper } from './medicos.mapper';
 import { IMapperToken } from 'src/shared/interfaces/mapper.interface';
 import { IMedicoRepositoryToken } from './domain/interfaces/medico-repository.interface';
-import { MedicoTransaccion } from './infra/persistencia/medico-transaccion.typeorm';
 
 @Module({
   imports: [SharedModule, TypeOrmModule.forFeature([MedicoModel])],
   controllers: [MedicosController],
   providers: [
     MedicosService,
-    MedicoTransaccion,
     MedicoRepository,
     // {
     //   provide: IRepositoryToken,
@@ -31,6 +29,6 @@ import { MedicoTransaccion } from './infra/persistencia/medico-transaccion.typeo
       useExisting: MedicoMapper,
     },
   ],
-  exports: [MedicosService, MedicoRepository, IMedicoRepositoryToken, MedicoTransaccion],
+  exports: [MedicosService, MedicoRepository, IMedicoRepositoryToken],
 })
 export class MedicosModule { }
