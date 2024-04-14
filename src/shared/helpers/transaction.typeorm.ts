@@ -1,20 +1,18 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IMapper, IMapperToken } from "src/shared/interfaces/mapper.interface";
-import { IRepository } from "src/shared/interfaces/repository.interface";
 import { DataSource, QueryRunner } from "typeorm";
 
 @Injectable()
-export abstract class TransactionTypeorm<db, entity, id> implements IRepository<entity, id> {
+export class TransactionTypeorm {
 
     queryRunner: QueryRunner = null
 
     constructor(
         private readonly dataSourse: DataSource,
-        @Inject(IMapperToken)
-        private readonly mapper: IMapper<entity, db>
     ) {
         this.queryRunner = this.dataSourse.createQueryRunner()
     }
+
 
     async startTransaccion() {
         this.queryRunner = this.dataSourse.createQueryRunner()
@@ -35,18 +33,12 @@ export abstract class TransactionTypeorm<db, entity, id> implements IRepository<
     }
 
 
-    async save(modelo: entity): Promise<entity> {
-        const modelodb = this.mapper.toPersistencia(modelo)
+    async save<entity, dbModel>(modelo: entity, mapper: IMapper<entity, dbModel>): Promise<entity> {
+        const modelodb = mapper.toPersistencia(modelo)
         const dbm = await this.queryRunner.manager.save(modelodb)
-        return this.mapper.toDomain(dbm)
+        return mapper.toDomain(dbm)
     }
-    findByOne(id: id): Promise<entity> {
-        throw new Error("Method not implemented.");
-    }
-    findAll(): Promise<entity[]> {
-        throw new Error("Method not implemented.");
-    }
-    update(id: string, modelodb: entity): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
+
+
+
 }
