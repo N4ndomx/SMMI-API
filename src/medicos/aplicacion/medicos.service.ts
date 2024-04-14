@@ -20,8 +20,7 @@ export class MedicosService {
   constructor(
     @Inject(IMedicoRepositoryToken)
     private readonly medicoRepo: IMedicoRepository,
-
-  ) { }
+  ) {}
   async create(createMedicoDto: CreateMedicoDto) {
     try {
       let medico = new Medico(
@@ -64,6 +63,6 @@ export class MedicosService {
   }
 
   async findAll() {
-    return await this.medicoRepo.findAll()
+    return await this.medicoRepo.findAll();
   }
 }

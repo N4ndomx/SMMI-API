@@ -31,4 +31,4 @@ import { IMedicoRepositoryToken } from './domain/interfaces/medico-repository.in
   ],
   exports: [MedicosService, MedicoRepository, IMedicoRepositoryToken],
 })
-export class MedicosModule { }
+export class MedicosModule {}

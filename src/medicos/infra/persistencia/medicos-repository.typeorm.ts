@@ -8,45 +8,45 @@ import { Medico } from 'src/medicos/domain/entities/medico.entity';
 
 @Injectable()
 export class MedicoRepository implements IMedicoRepository {
-    constructor(
-        @InjectRepository(MedicoModel)
-        private readonly _medicoRepo: Repository<MedicoModel>,
-        @Inject(IMapperToken)
-        private readonly mapperMedico: IMapper<Medico, MedicoModel>
-    ) { }
-    async findByCURP(curp: string): Promise<Medico> {
-        const product = await this._medicoRepo.findOne({
-            relations: { empleado: true },
-            where: {
-                empleado: { curp: curp },
-            },
-        });
+  constructor(
+    @InjectRepository(MedicoModel)
+    private readonly _medicoRepo: Repository<MedicoModel>,
+    @Inject(IMapperToken)
+    private readonly mapperMedico: IMapper<Medico, MedicoModel>,
+  ) {}
+  async findByCURP(curp: string): Promise<Medico> {
+    const product = await this._medicoRepo.findOne({
+      relations: { empleado: true },
+      where: {
+        empleado: { curp: curp },
+      },
+    });
 
-        return product ? this.mapperMedico.toDomain(product) : null;
-    }
-    async findByOne(id: string): Promise<Medico> {
-        const product = await this._medicoRepo.findOne({
-            relations: { empleado: true },
-            where: {
-                matriculaMedico: id,
-            },
-        });
+    return product ? this.mapperMedico.toDomain(product) : null;
+  }
+  async findByOne(id: string): Promise<Medico> {
+    const product = await this._medicoRepo.findOne({
+      relations: { empleado: true },
+      where: {
+        matriculaMedico: id,
+      },
+    });
 
-        return product ? this.mapperMedico.toDomain(product) : null;
-    }
+    return product ? this.mapperMedico.toDomain(product) : null;
+  }
 
-    async save(modelodb: Medico): Promise<Medico> {
+  async save(modelodb: Medico): Promise<Medico> {
+    const dbr = await this._medicoRepo.save(
+      this.mapperMedico.toPersistencia(modelodb),
+    );
+    return dbr ? this.mapperMedico.toDomain(dbr) : null;
+  }
 
-        const dbr = await this._medicoRepo.save(
-            this.mapperMedico.toPersistencia(modelodb));
-        return dbr ? this.mapperMedico.toDomain(dbr) : null;
-    }
-
-    async findAll(): Promise<Medico[]> {
-        const dbr = await this._medicoRepo.find()
-        return dbr.map((dbm) => this.mapperMedico.toDomain(dbm))
-    }
-    update(id: string, item: Medico): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
+  async findAll(): Promise<Medico[]> {
+    const dbr = await this._medicoRepo.find();
+    return dbr.map((dbm) => this.mapperMedico.toDomain(dbm));
+  }
+  update(id: string, item: Medico): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
 }

@@ -27,6 +27,6 @@ export class MedicoModel {
   empleado: EmpleadoModel;
 
   @ManyToMany(() => EspecialidadModel)
-  @JoinTable({ name: "especialidad_medicos", })
-  especialidades: EspecialidadModel[]
+  @JoinTable({ name: 'especialidad_medicos' })
+  especialidades: EspecialidadModel[];
 }
