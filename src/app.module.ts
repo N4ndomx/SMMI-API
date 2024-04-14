@@ -1,10 +1,25 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MedicosModule } from './medicos/medicos.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmConfig } from './config/typeorml.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import { EspecialidadesModule } from './especialidades/especialidades.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass: TypeOrmConfig,
+    }),
+    MedicosModule,
+    SharedModule,
+    AuthModule,
+    EspecialidadesModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
