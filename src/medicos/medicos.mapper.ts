@@ -3,9 +3,10 @@ import { Medico } from './domain/entities/medico.entity';
 import { MedicoModel } from './infra/persistencia/models/medico.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import { Injectable } from '@nestjs/common';
+import { EspecialidadMapper } from 'src/especialidades/especialidad.mapper';
 @Injectable()
-export class MedicoMapper implements IMapper<Medico, MedicoModel> {
-  toDomain(dbModel: MedicoModel): Medico {
+export class MedicoMapper {
+  static toDomain(dbModel: MedicoModel): Medico {
     const medico = new Medico(
       dbModel.empleado.nombres,
       dbModel.empleado.apellidos,
@@ -21,7 +22,7 @@ export class MedicoMapper implements IMapper<Medico, MedicoModel> {
     return medico;
   }
 
-  toPersistencia(domain: Medico): MedicoModel {
+  static toPersistencia(domain: Medico): MedicoModel {
     const empleado = new EmpleadoModel();
     empleado.id = domain.id;
     empleado.nombres = domain.nombres;
@@ -36,6 +37,8 @@ export class MedicoMapper implements IMapper<Medico, MedicoModel> {
     medicoModel.cedula = domain.cedula;
     medicoModel.contrasena = domain.contrasena;
     medicoModel.empleado = empleado;
+    // medicoModel.especialidades = domain.especialidades.map(dominio => EspecialidadMapper.toPersistencia(dominio))
+
 
     return medicoModel;
   }

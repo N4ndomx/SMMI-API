@@ -6,9 +6,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToOne,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('Medicos')
@@ -26,7 +24,21 @@ export class MedicoModel {
   @JoinColumn({ name: 'idEmpleado' })
   empleado: EmpleadoModel;
 
-  @ManyToMany(() => EspecialidadModel)
-  @JoinTable({ name: 'especialidad_medicos' })
-  especialidades: EspecialidadModel[];
+  @ManyToMany(() => EspecialidadModel,
+    {
+      onDelete: "NO ACTION", onUpdate: "NO ACTION"
+    }
+  )
+  @JoinTable({
+    name: "Medico_Especialidad",
+    joinColumn: {
+      name: "matricula_medico",
+      referencedColumnName: "matriculaMedico"
+    },
+    inverseJoinColumn: {
+      name: "especialidad_id",
+      referencedColumnName: "id"
+    }
+  })
+  especialidades?: EspecialidadModel[]
 }

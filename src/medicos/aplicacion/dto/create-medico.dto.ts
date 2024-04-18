@@ -4,6 +4,7 @@ import {
   IsInt,
   IsMobilePhone,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MinLength,
 } from 'class-validator';
@@ -43,6 +44,7 @@ export class CreateMedicoDto {
   @MinLength(8)
   contrasena: string;
   @IsInt({ each: true })
+  @IsOptional()
   @IsArray()
-  id_especialidades: number[];
+  id_especialidades?: number[];
 }
