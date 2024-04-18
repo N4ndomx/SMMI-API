@@ -159,6 +159,7 @@ export class AuthService {
     } else if (matricula.startsWith("E")) {
       res = await this.loginEnfermera(matricula, contraseña)
     } else {
+      //TODO: Falta login y registro de admin
       res = await this.loginAdmin(matricula, contraseña)
     }
 
