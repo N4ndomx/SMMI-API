@@ -13,8 +13,8 @@ import {
 import {
   OpcionFiedOne,
   TIPO_BUSQUEDA,
-} from 'src/auth/aplicacion/dto/opcion-fiedOne.dto';
-import { Errores_Medicos } from 'src/shared/helpers/medicos.helper';
+} from 'src/shared/interfaces/opcion-fiedOne.dto';
+import { Errores_MEDICO } from 'src/shared/helpers/medicos.helper';
 import { ITransactionRunner } from 'src/shared/interfaces/TransactionFactory/transactions.interface';
 import { EspecialidadesService } from 'src/especialidades/applicacion/especialidades.service';
 import { Especialidad } from 'src/especialidades/domain/entities/especialidade.entity';
@@ -37,6 +37,7 @@ export class MedicosService {
       createMedicoDto.cedula,
       createMedicoDto.contrasena,
       createMedicoDto.genero,
+      createMedicoDto.url_img
     );
     await this.medicoRepo.save(medico, transactionRunner);
 
@@ -66,7 +67,7 @@ export class MedicosService {
     if (!medico) {
       throw new NotFoundException(
         {
-          mensaje: Errores_Medicos.MEDICO_NOT_FOUND,
+          mensaje: Errores_MEDICO.MEDICO_NOT_FOUND,
           razon: `${termino.type} : ${termino.value}`
         }
 

@@ -10,11 +10,11 @@ import {
 import { MedicosService } from './aplicacion/medicos.service';
 import { CreateMedicoDto } from './aplicacion/dto/create-medico.dto';
 import { TerminoValidate } from 'src/shared/pipes/termino.pipe';
-import { OpcionFiedOne } from 'src/auth/aplicacion/dto/opcion-fiedOne.dto';
+import { OpcionFiedOne } from 'src/shared/interfaces/opcion-fiedOne.dto';
 
 @Controller('medicos')
 export class MedicosController {
-  constructor(private readonly medicosService: MedicosService) {}
+  constructor(private readonly medicosService: MedicosService) { }
 
   @Post()
   create(@Body() createMedicoDto: CreateMedicoDto) {

@@ -1,9 +1,7 @@
-import { IMapper } from 'src/shared/interfaces/mapper.interface';
 import { Medico } from './domain/entities/medico.entity';
 import { MedicoModel } from './infra/persistencia/models/medico.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import { Injectable } from '@nestjs/common';
-import { EspecialidadMapper } from 'src/especialidades/especialidad.mapper';
 @Injectable()
 export class MedicoMapper {
   static toDomain(dbModel: MedicoModel): Medico {
@@ -16,6 +14,7 @@ export class MedicoMapper {
       dbModel.cedula,
       dbModel.contrasena,
       dbModel.empleado.genero,
+      dbModel.empleado.url_image,
       dbModel.matriculaMedico,
       dbModel.empleado.id,
     );
@@ -31,6 +30,7 @@ export class MedicoMapper {
     empleado.telefono = domain.telefono;
     empleado.curp = domain.curp;
     empleado.genero = domain.genero;
+    empleado.url_image = domain.url_img
 
     const medicoModel = new MedicoModel();
     medicoModel.matriculaMedico = domain.matriculaMedico;

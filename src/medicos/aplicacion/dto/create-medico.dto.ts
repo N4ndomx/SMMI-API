@@ -6,13 +6,12 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUrl,
   MinLength,
 } from 'class-validator';
+import { GENERO } from 'src/shared/helpers/generos.helper';
 
-enum GENERO {
-  FEMENINO = 'F',
-  MASCULINO = 'M',
-}
+
 
 export class CreateMedicoDto {
   @IsString()
@@ -43,6 +42,10 @@ export class CreateMedicoDto {
   @IsString()
   @MinLength(8)
   contrasena: string;
+  @IsString()
+  @IsNotEmpty()
+  @IsUrl()
+  url_img: string;
   @IsInt({ each: true })
   @IsOptional()
   @IsArray()

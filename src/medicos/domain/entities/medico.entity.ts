@@ -16,11 +16,12 @@ export class Medico extends Empleado {
     cedula: string,
     contrasena: string,
     genero: string,
+    url_img: string,
     matricula?: string,
     id?: string,
     especialidades?: []
   ) {
-    super(nombres, apellidos, direccion, telefono, curp, genero, id);
+    super(nombres, apellidos, direccion, telefono, curp, genero, url_img, id);
     this.cedula = cedula;
     this.contrasena = contrasena;
     this.especialidades = especialidades
