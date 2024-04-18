@@ -21,4 +21,7 @@ export class EmpleadoModel {
   curp: string;
   @Column('char', { nullable: true })
   genero: string;
+
+  @Column("text")
+  url_image: string
 }

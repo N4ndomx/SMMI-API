@@ -7,7 +7,7 @@ import {
 import {
   OpcionFiedOne,
   TIPO_BUSQUEDA,
-} from 'src/auth/aplicacion/dto/opcion-fiedOne.dto';
+} from 'src/shared/interfaces/opcion-fiedOne.dto';
 
 @Injectable()
 export class TerminoValidate implements PipeTransform<string, OpcionFiedOne> {

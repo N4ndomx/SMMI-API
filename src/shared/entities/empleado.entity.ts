@@ -7,6 +7,7 @@ export abstract class Empleado {
   telefono: string;
   curp: string;
   genero: string;
+  url_img: string
 
   constructor(
     nombres: string,
@@ -15,6 +16,7 @@ export abstract class Empleado {
     telefono: string,
     curp: string,
     genero: string,
+    url_img: string,
     id?: string,
   ) {
     this.id = id ?? uuidv4();
@@ -24,5 +26,6 @@ export abstract class Empleado {
     this.telefono = telefono;
     this.curp = curp;
     this.genero = genero;
+    this.url_img = url_img
   }
 }
