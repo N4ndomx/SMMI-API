@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { EspecialidadesModule } from './especialidades/especialidades.module';
+import { EnfermerasModule } from './enfermeras/enfermeras.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EspecialidadesModule } from './especialidades/especialidades.module';
     SharedModule,
     AuthModule,
     EspecialidadesModule,
+    EnfermerasModule,
   ],
   controllers: [],
   providers: [],
