@@ -1,7 +1,7 @@
 export const IRepositoryToken = Symbol('IRepository');
-export interface IRepository<ENTITY, ID> {
-  save(modelodb: ENTITY): Promise<ENTITY>;
-  findByOne(id: ID): Promise<ENTITY>;
-  findAll(): Promise<ENTITY[]>;
-  update(id: string, modelodb: ENTITY): Promise<boolean>;
+export interface IRepository<entity, ID, EntityManager> {
+  save(modelodb: entity, transactionRunner?: EntityManager): Promise<entity>;
+  findByOne(id: ID, transactionRunner?: EntityManager): Promise<entity>;
+  findAll(transactionRunner?: EntityManager): Promise<entity[]>;
+  update(id: string, modelodb: entity, transactionRunner?: EntityManager): Promise<boolean>;
 }
