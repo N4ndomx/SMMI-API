@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { EspecialidadesModule } from './especialidades/especialidades.module';
 import { EnfermerasModule } from './enfermeras/enfermeras.module';
+import { SensoresModule } from './sensores/sensores.module';
 
 @Module({
   imports: [
@@ -20,8 +21,9 @@ import { EnfermerasModule } from './enfermeras/enfermeras.module';
     AuthModule,
     EspecialidadesModule,
     EnfermerasModule,
+    SensoresModule
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
