@@ -12,6 +12,7 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
       password: process.env.DATABASE_PASSWORD,
       username: process.env.DATABASE_USERNAME,
       synchronize: true,
+      dropSchema: true,
       autoLoadEntities: true, // carga auto las entidades
       // migrations: ["dist/migrations/*.migration.ts"],
     };
