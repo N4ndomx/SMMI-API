@@ -27,7 +27,7 @@ export class CatalogoSensoresRepository implements ICatalogoSensorRepository {
         const res = await this.repository.find()
         return res ? res.map((e) => CatalogoSensorMapper.toDomain(e)) : []
     }
-    update(id: string, modelodb: CatalogoSensor): Promise<boolean> {
+    update(id: number, modelodb: CatalogoSensor): Promise<boolean> {
         throw new Error('Method not implemented.');
     }
 

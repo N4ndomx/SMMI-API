@@ -25,7 +25,7 @@ export class SensoresDataRepository implements ISensorDataRepository {
     findAll(): Promise<SensorData[]> {
         throw new Error('Method not implemented.');
     }
-    update(id: string, modelodb: SensorData): Promise<boolean> {
+    update(id: number, modelodb: SensorData): Promise<boolean> {
         throw new Error('Method not implemented.');
     }
 
