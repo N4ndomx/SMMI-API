@@ -15,13 +15,15 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
       username: process.env.DATABASE_USERNAME,
-      entities: [MedicoModel,EnfermeraModel,EspecialidadModel,Medico_Especialidad_Model],
+      entities: [MedicoModel, EnfermeraModel, EspecialidadModel, Medico_Especialidad_Model],
       autoLoadEntities: true,
       extra: {
         ssl: true,
         sslmode: 'require',
       },
-      // carga auto las entidades
+      // synchronize: true,
+      // dropSchema: true,
+
       // migrations: ["dist/migrations/*.migration.ts"],
     };
   }
