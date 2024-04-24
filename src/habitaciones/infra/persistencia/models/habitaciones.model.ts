@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { SensorDataModel } from "src/sensores/infra/persistencia/models/sensor.model";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Habitaciones")
 export class HabitacionModel {
@@ -8,4 +9,7 @@ export class HabitacionModel {
     nombre_habitacion: string
     @Column('boolean', { default: false })
     ocupado: boolean
+
+    @OneToMany(() => SensorDataModel, (model) => model.topico_sensor)
+    dataSensor: SensorDataModel[]
 }

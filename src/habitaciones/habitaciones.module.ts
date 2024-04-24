@@ -17,5 +17,6 @@ import { HabitacionModel } from './infra/persistencia/models/habitaciones.model'
       useExisting: HabitacionesRepository
     }
   ],
+  exports: [HabitacionesService, HabitacionesRepository, IHabitacionRepositoryToken],
 })
 export class HabitacionesModule { }

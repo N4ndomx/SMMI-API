@@ -28,7 +28,7 @@ export class HabitacionesService {
     return await this.repository.getAllDesocupados()
   }
 
-  async findOne(id: number) {
+  async findOne_ocupado(id: number) {
     const res = await this.repository.findByOne(id)
     if (!res) {
       throw new NotFoundException("Habitacion no encontrada")
@@ -37,7 +37,7 @@ export class HabitacionesService {
   }
 
   async update(id: number, updateHabitacioneDto: UpdateHabitacioneDto) {
-    await this.findOne(id)
+    await this.findOne_ocupado(id)
     const res = await this.repository.update(id, { ocupado: updateHabitacioneDto.ocupado })
     return res
   }
