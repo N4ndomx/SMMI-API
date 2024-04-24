@@ -13,7 +13,7 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
       username: process.env.DATABASE_USERNAME,
-      entities: [CatalogoSensoresModel, EmpleadoModel, EnfermeraModel, EspecialidadesModule, HabitacionModel, MedicoModel, Medico_Especialidad_Model, SensorDataModel],
+      entities: [CatalogoSensoresModel, EmpleadoModel, EnfermeraModel, EspecialidadesModule, HabitacionModel, MedicoModel, Medico_Especialidad_Model, SensorDataModel, CatalogoSensoresModel],
       autoLoadEntities: true,
       extra: {
         ssl: true,
