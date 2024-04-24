@@ -24,8 +24,8 @@ export class MedicoRepository implements IMedicoRepository {
     };
 
     const product = transactionRunner
-      ? await this.repository.findOne(queryOptions)
-      : await transactionRunner.transactionManager.findOne(MedicoModel, queryOptions);
+      ? await transactionRunner.transactionManager.findOne(MedicoModel, queryOptions)
+      : await this.repository.findOne(queryOptions)
 
     return product ? MedicoMapper.toDomain(product) : null;
   }

@@ -10,9 +10,11 @@ import { ISensorDataRepositoryToken } from './domain/interface/sensores-interfac
 import { CatalogoSensoresRepository } from './infra/persistencia/catalogo-sensores.repository';
 import { ICatalogoSensorRepositoryToken } from './domain/interface/catalogo-sensores-interface';
 import { CatalogoSensoresModel } from './infra/persistencia/models/catalogo-sensores.model';
+import { HabitacionModel } from 'src/habitaciones/infra/persistencia/models/habitaciones.model';
+import { HabitacionesModule } from 'src/habitaciones/habitaciones.module';
 
 @Module({
-  imports: [SharedModule, TypeOrmModule.forFeature([SensorDataModel, CatalogoSensoresModel])],
+  imports: [SharedModule, TypeOrmModule.forFeature([SensorDataModel, CatalogoSensoresModel]), HabitacionesModule],
   controllers: [SensoresController],
   providers: [SensoresDataService,
     SensoresDataRepository,

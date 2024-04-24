@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Req } from '@nestjs/common';
 import { SensoresDataService } from './aplicacion/sensores.service';
 import { UpdateSensoreDto } from './aplicacion/dto/update-sensore.dto';
-import { EmqxTransfrormPipe } from 'src/shared/pipes/emqx.transform.pipe';
+import { EmqxTransfrormPipe } from 'src/sensores/infra/pipes/emqx.transform.pipe';
 
 @Controller('sensores')
 export class SensoresController {
@@ -11,7 +11,7 @@ export class SensoresController {
   create(@Body(EmqxTransfrormPipe) body: any) {
     return this.sensoresService.create(body)
   }
-  @Post("/catalogo")
+  @Get("/seed")
   create_sensor(body: any) {
     return this.sensoresService.create_catalogo_sensores()
   }

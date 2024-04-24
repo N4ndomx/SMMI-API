@@ -9,6 +9,7 @@ export class CreateDataSensorDto {
     peerhost: string;
     node: string;
     flags: Flags;
+    se: { id_sensor: number; valor: number; };
 }
 
 export interface Flags {

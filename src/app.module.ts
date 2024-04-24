@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { EspecialidadesModule } from './especialidades/especialidades.module';
 import { EnfermerasModule } from './enfermeras/enfermeras.module';
 import { SensoresModule } from './sensores/sensores.module';
+import { HabitacionesModule } from './habitaciones/habitaciones.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { SensoresModule } from './sensores/sensores.module';
     AuthModule,
     EspecialidadesModule,
     EnfermerasModule,
-    SensoresModule
+    SensoresModule,
+    HabitacionesModule
   ],
   controllers: [],
   providers: [],
