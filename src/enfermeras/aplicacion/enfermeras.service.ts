@@ -36,8 +36,8 @@ export class EnfermerasService {
     }
   }
 
-  findAll() {
-    return `This action returns all enfermeras`;
+  async findAll() {
+    return await this.repository.findAll()
   }
 
   async findOne(termino: OpcionFiedOne,) {
@@ -54,13 +54,7 @@ export class EnfermerasService {
     return enfer;
   }
 
-  update(id: number, updateEnfermeraDto: UpdateEnfermeraDto) {
-    return `This action updates a #${id} enfermera`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} enfermera`;
-  }
   async _getMedicoByTermino(termino: OpcionFiedOne, transactionRunner?: ITransactionRunner) {
     let enfer = null;
     if (termino.type === TIPO_BUSQUEDA.CURP) {
