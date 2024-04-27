@@ -9,12 +9,14 @@ import { MedicoMapper } from 'src/medicos/medicos.mapper';
 import { EspecialidadesModule } from 'src/especialidades/especialidades.module';
 import { SharedModule } from 'src/shared/shared.module';
 import { EnfermerasModule } from 'src/enfermeras/enfermeras.module';
+import { AdminModule } from 'src/admin/admin.module';
 
 @Module({
   imports: [
     SharedModule,
     MedicosModule,
     EnfermerasModule,
+    AdminModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
@@ -24,11 +26,6 @@ import { EnfermerasModule } from 'src/enfermeras/enfermeras.module';
   controllers: [AuthController],
   providers: [
     AuthService,
-    MedicoMapper,
-    {
-      provide: IMapperToken,
-      useExisting: MedicoMapper,
-    },
   ],
 })
 export class AuthModule { }

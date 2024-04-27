@@ -56,7 +56,6 @@ export class EnfermeraRepository implements IEnfermeraRepository {
         const dbr = transactionRunner
             ? await transactionRunner.transactionManager.find(EnfermeraModel)
             : await this.repository.find();
-
         return dbr.map((dbm) => EnfermeraMapper.toDomain(dbm));
     }
     async update(id: string, modelodb: Enfermera, transactionRunner?: ITransactionRunner): Promise<boolean> {

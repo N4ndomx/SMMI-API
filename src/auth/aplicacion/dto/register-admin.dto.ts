@@ -1,10 +1,15 @@
-import { IsString, MinLength } from "class-validator";
+import { IsBoolean, IsEnum, IsNotEmpty, IsString, MinLength } from "class-validator";
 import { BasicRegisterDto } from "./resgister-auth.dto";
+import { NIVEL_EDUCACION } from "src/admin/infra/model/Admin.model";
 
 export class AdminRegisterDTO extends BasicRegisterDto {
-    @IsString()
-    @MinLength(5)
-    cedula: string;
+    @IsNotEmpty()
+    @IsBoolean()
+    conocimiento_auxilios: boolean
+
+    @IsEnum(NIVEL_EDUCACION)
+    @IsNotEmpty()
+    nivel_educacion: string
 
     @IsString()
     @MinLength(8)
