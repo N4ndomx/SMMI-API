@@ -30,19 +30,9 @@ export class MedicoModel {
   @OneToMany(() => Medico_Especialidad_Model,
     (model) => model.medicos,
     {
+      eager: true,
       onDelete: "NO ACTION", onUpdate: "NO ACTION"
     }
   )
-  // @JoinTable({
-  //   name: "Medico_Especialidad",
-  //   joinColumn: {
-  //     name: "matricula_medico",
-  //     referencedColumnName: "matriculaMedico"
-  //   },
-  //   inverseJoinColumn: {
-  //     name: "especialidad_id",
-  //     referencedColumnName: "id"
-  //   }
-  // })
-  especialidades?: Medico_Especialidad_Model
+  especialidades: Medico_Especialidad_Model[]
 }

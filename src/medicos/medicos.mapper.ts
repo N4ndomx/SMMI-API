@@ -2,9 +2,12 @@ import { Medico } from './domain/entities/medico.entity';
 import { MedicoModel } from './infra/persistencia/models/medico.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import { Injectable } from '@nestjs/common';
+import { EspecialidadMapper } from 'src/especialidades/especialidad.mapper';
 @Injectable()
 export class MedicoMapper {
   static toDomain(dbModel: MedicoModel): Medico {
+    const especialidad = dbModel.especialidades.map((modeljoin) => modeljoin.especialidad).flat()
+    const domainEsp = especialidad.map((model) => EspecialidadMapper.toDomain(model))
     const medico = new Medico(
       dbModel.empleado.nombres,
       dbModel.empleado.apellidos,
@@ -17,6 +20,7 @@ export class MedicoMapper {
       dbModel.empleado.url_image,
       dbModel.matriculaMedico,
       dbModel.empleado.id,
+      domainEsp
     );
     return medico;
   }

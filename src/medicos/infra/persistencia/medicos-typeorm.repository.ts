@@ -58,6 +58,7 @@ export class MedicoRepository implements IMedicoRepository {
       ? await transactionRunner.transactionManager.find(MedicoModel)
       : await this.repository.find();
 
+
     return dbr.map((dbm) => MedicoMapper.toDomain(dbm));
   }
   async update(id: string, modelodb: Medico, transactionRunner?: ITransactionRunner): Promise<boolean> {

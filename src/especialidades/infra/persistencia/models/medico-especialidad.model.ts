@@ -15,7 +15,7 @@ export class Medico_Especialidad_Model {
     @ManyToOne(
         () => MedicoModel,
         medico => medico.especialidades,
-        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' }
+        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', }
     )
     @JoinColumn([{ name: 'matricula_medico', referencedColumnName: 'matriculaMedico' }])
     medicos: MedicoModel[];
@@ -23,7 +23,7 @@ export class Medico_Especialidad_Model {
     @ManyToOne(
         () => EspecialidadModel,
         espe => espe.medico_especialidad,
-        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' }
+        { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', eager: true }
     )
     @JoinColumn([{ name: 'especialidad_id', referencedColumnName: 'id' }])
     especialidad: EspecialidadModel[];
