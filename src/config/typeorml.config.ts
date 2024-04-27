@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { CatalogoSensoresModel, EmpleadoModel, EnfermeraModel, EspecialidadesModule, HabitacionModel, MedicoModel, Medico_Especialidad_Model, SensorDataModel } from 'src/shared/models';
 
 
 @Injectable()
@@ -13,16 +12,13 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
       username: process.env.DATABASE_USERNAME,
-      entities: [CatalogoSensoresModel, EmpleadoModel, EnfermeraModel, EspecialidadesModule, HabitacionModel, MedicoModel, Medico_Especialidad_Model, SensorDataModel, CatalogoSensoresModel],
       autoLoadEntities: true,
-      extra: {
-        ssl: true,
-        sslmode: 'require',
-      },
-      // synchronize: true,
-      // dropSchema: true,
+      // extra: {
+      //   ssl: true,
+      //   sslmode: 'require',
+      // },
+      synchronize: true,
 
-      // migrations: ["dist/migrations/*.migration.ts"],
     };
   }
 }

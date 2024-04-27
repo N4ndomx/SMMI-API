@@ -1,4 +1,5 @@
 import { EspecialidadModel } from 'src/especialidades/infra/persistencia/models/especialidades.model';
+import { Medico_Especialidad_Model } from 'src/especialidades/infra/persistencia/models/medico-especialidad.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import {
   Column,
@@ -6,6 +7,8 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 
@@ -24,21 +27,22 @@ export class MedicoModel {
   @JoinColumn({ name: 'idEmpleado' })
   empleado: EmpleadoModel;
 
-  @ManyToMany(() => EspecialidadModel,
+  @OneToMany(() => Medico_Especialidad_Model,
+    (model) => model.medicos,
     {
       onDelete: "NO ACTION", onUpdate: "NO ACTION"
     }
   )
-  @JoinTable({
-    name: "Medico_Especialidad",
-    joinColumn: {
-      name: "matricula_medico",
-      referencedColumnName: "matriculaMedico"
-    },
-    inverseJoinColumn: {
-      name: "especialidad_id",
-      referencedColumnName: "id"
-    }
-  })
-  especialidades?: EspecialidadModel[]
+  // @JoinTable({
+  //   name: "Medico_Especialidad",
+  //   joinColumn: {
+  //     name: "matricula_medico",
+  //     referencedColumnName: "matriculaMedico"
+  //   },
+  //   inverseJoinColumn: {
+  //     name: "especialidad_id",
+  //     referencedColumnName: "id"
+  //   }
+  // })
+  especialidades?: Medico_Especialidad_Model
 }

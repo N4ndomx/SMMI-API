@@ -1,5 +1,6 @@
 import { MedicoModel } from 'src/medicos/infra/persistencia/models/medico.model';
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Medico_Especialidad_Model } from './medico-especialidad.model';
 
 @Entity('Catalogo_Especialidades')
 export class EspecialidadModel {
@@ -11,12 +12,12 @@ export class EspecialidadModel {
   @Column('varchar', { length: 200, nullable: false })
   descipcion: string;
 
-  @ManyToMany(
-    () => MedicoModel,
-    medico => medico.especialidades,
+  @OneToMany(
+    () => Medico_Especialidad_Model,
+    (model) => model.especialidad,
     {
       onDelete: "NO ACTION", onUpdate: "NO ACTION"
     })
-  medicos: MedicoModel[]
+  medico_especialidad: Medico_Especialidad_Model
 
 }
