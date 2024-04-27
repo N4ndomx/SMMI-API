@@ -19,7 +19,7 @@ export class Medico extends Empleado {
     url_img: string,
     matricula?: string,
     id?: string,
-    especialidades?: []
+    especialidades?: Especialidad[]
   ) {
     super(nombres, apellidos, direccion, telefono, curp, genero, url_img, id);
     this.cedula = cedula;
