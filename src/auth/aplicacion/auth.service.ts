@@ -19,6 +19,8 @@ import { EnfermerasService } from 'src/enfermeras/aplicacion/enfermeras.service'
 import { EnfermeraRegisterDTO } from './dto/register-enfermera.dto';
 import { AdminRegisterDTO } from './dto/register-admin.dto';
 import { Enfermera } from 'src/enfermeras/domain/entities/enfermera.entity';
+import { AdminService } from 'src/admin/aplicacion/admin.service';
+import { Admin } from 'src/admin/domain/entities/admin.entity';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +28,7 @@ export class AuthService {
     private readonly transactionFactory: DbTransactionFactory,
     private readonly medicoService: MedicosService,
     private readonly enfermeraService: EnfermerasService,
+    private readonly adminService: AdminService,
 
     private readonly jwtService: JwtService,
   ) { }
@@ -68,7 +71,22 @@ export class AuthService {
       id: user.id
     }
   }
-  private async loginAdmin(matricula: string, contrasena: string) { }
+  private async loginAdmin(matricula: string, contrasena: string) {
+    const user: Admin = await this.adminService.findOne({
+      type: TIPO_BUSQUEDA.MATRICULA,
+
+      value: matricula
+    });
+
+    const isPasswordValid = await bcrypt.compare(contrasena, user.contrasena);
+    if (!user || !isPasswordValid) {
+      throw new UnauthorizedException('Matricula/Password Invalida');
+    }
+    return {
+      matricula,
+      id: user.id
+    }
+  }
 
   async registerMedico({ contrasena, curp, ...data }: MedicoRegisterDTO) {
 
@@ -150,6 +168,44 @@ export class AuthService {
     }
   }
   async registerAdmin({ contrasena, curp, ...data }: AdminRegisterDTO) {
+    const transactionRunner: ITransactionRunner = await this.transactionFactory.createTransaction();
+    try {
+
+      await transactionRunner.startTransaction();
+
+      const medico = await this.adminService._getAdminByTermino({ type: TIPO_BUSQUEDA.CURP, value: curp }, transactionRunner)
+      if (medico) {
+        throw new BadRequestException(
+          Errores_MEDICO.MEDICO_ALREADY_EXISTS,
+        );
+      }
+
+      const hashedPassword = await this.hashPassword(contrasena);
+      const { matricula, id } = await this.adminService.create(
+        {
+          curp,
+          contrasena: hashedPassword,
+          ...data
+
+        }
+        ,
+        transactionRunner
+      )
+
+
+      await transactionRunner.commitTransaction();
+      return {
+        matricula,
+        id_empleado: id,
+        message: 'Admin created successfully',
+      };
+    } catch (error) {
+      await transactionRunner.rollbackTransaction();
+      console.log(error)
+      throw new BadRequestException(error.detail ?? error.message);
+    } finally {
+      await transactionRunner.releaseTransaction();
+    }
 
   }
   async login({ matricula, contraseña }: LoginDTO) {

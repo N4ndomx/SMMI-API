@@ -18,7 +18,7 @@ export class EnfermeraModel {
     })
     habilidades_tecnicas: string[];
 
-    @OneToOne(() => EmpleadoModel, { cascade: true })
+    @OneToOne(() => EmpleadoModel, { cascade: true, eager: true })
     @JoinColumn({ name: 'idEmpleado' })
     empleado: EmpleadoModel;
 }

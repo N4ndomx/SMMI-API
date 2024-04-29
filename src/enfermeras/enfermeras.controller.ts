@@ -25,13 +25,4 @@ export class EnfermerasController {
     return this.enfermerasService.findOne(termino);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEnfermeraDto: UpdateEnfermeraDto) {
-    return this.enfermerasService.update(+id, updateEnfermeraDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.enfermerasService.remove(+id);
-  }
 }
