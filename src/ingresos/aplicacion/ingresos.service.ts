@@ -63,6 +63,18 @@ export class IngresosService {
   async findAllSinAlta() {
     return await this.ingresosRepository.findAll_No_Alta()
   }
+  async asignados_enfermera(matricula: string) {
+    try {
+      this.enfermeraService.findOne({
+        type: TIPO_BUSQUEDA.MATRICULA,
+        value: matricula
+      })
+
+      return await this.ingresosRepository.asignados_enfermera(matricula)
+    } catch (error) {
+      throw new BadRequestException(error.message)
+    }
+  }
 
   async findOne(id: string) {
 

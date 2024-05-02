@@ -13,7 +13,10 @@ export class IngresosRepository implements IIngresosRepository {
     ) { }
     async findAll_No_Alta(): Promise<Ingreso[]> {
         const data = await this.repository.find({ where: { de_alta: false } })
-
+        return data.map((dbm) => IngresoMapper.toDomain(dbm));
+    }
+    async asignados_enfermera(matricula_enf: string): Promise<Ingreso[]> {
+        const data = await this.repository.find({ where: { id_enfermera: { matriculaEnfermera: matricula_enf }, de_alta: false } })
         return data.map((dbm) => IngresoMapper.toDomain(dbm));
     }
     async save(modelodb: Ingreso): Promise<Ingreso> {

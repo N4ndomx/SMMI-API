@@ -20,6 +20,11 @@ export class IngresosController {
     return await this.ingresosService.findAllSinAlta()
   }
 
+  @Get('enfermera/:nurseId')
+  getPatientsAssignedToNurse(@Param('nurseId') nurseId: string) {
+    return this.ingresosService.asignados_enfermera(nurseId)
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.ingresosService.findOne(id);
