@@ -43,11 +43,7 @@ export class EnfermerasService {
   async findOne(termino: OpcionFiedOne,) {
     const enfer = await this._getMedicoByTermino(termino);
     if (!enfer) {
-      throw new NotFoundException(
-        {
-          mensaje: Errores_ENFERMERA.ENFERMERA_NOT_FOUND,
-          razon: `${termino.type} : ${termino.value}`
-        }
+      throw new NotFoundException(`${Errores_ENFERMERA.ENFERMERA_NOT_FOUND}`
 
       );
     }

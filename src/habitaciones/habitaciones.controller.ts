@@ -29,7 +29,7 @@ export class HabitacionesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.habitacionesService.findOne_ocupado(+id);
+    return this.habitacionesService.findOne(+id);
   }
 
   @Patch(':id')

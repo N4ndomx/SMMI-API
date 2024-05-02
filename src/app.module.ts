@@ -10,6 +10,7 @@ import { EnfermerasModule } from './enfermeras/enfermeras.module';
 import { SensoresModule } from './sensores/sensores.module';
 import { HabitacionesModule } from './habitaciones/habitaciones.module';
 import { AdminModule } from './admin/admin.module';
+import { IngresosModule } from './ingresos/ingresos.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { AdminModule } from './admin/admin.module';
     EnfermerasModule,
     SensoresModule,
     HabitacionesModule,
-    AdminModule
+    AdminModule,
+    IngresosModule
   ],
   controllers: [],
   providers: [],
