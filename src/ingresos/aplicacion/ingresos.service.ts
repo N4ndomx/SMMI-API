@@ -70,7 +70,7 @@ export class IngresosService {
         value: matricula
       })
 
-      return await this.ingresosRepository.asignados_enfermera(matricula)
+      return await this.ingresosRepository.find_asignados_enfermera(matricula)
     } catch (error) {
       throw new BadRequestException(error.message)
     }
@@ -83,6 +83,11 @@ export class IngresosService {
       throw new BadRequestException('Ingreso no encontrado')
     }
     return rest
+  }
+
+  async find_especialidad(id_especialidad: number) {
+    return await this.ingresosRepository.find_especialidad(id_especialidad)
+
   }
 
   async dar_alta(id: string) {

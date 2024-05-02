@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, ParseIntPipe } from '@nestjs/common';
 import { IngresosService } from './aplicacion/ingresos.service';
 import { CreateIngresoDto } from './aplicacion/dto/create-ingreso.dto';
 
@@ -23,6 +23,11 @@ export class IngresosController {
   @Get('enfermera/:nurseId')
   getPatientsAssignedToNurse(@Param('nurseId') nurseId: string) {
     return this.ingresosService.asignados_enfermera(nurseId)
+  }
+
+  @Get('especialidad/:Id')
+  getByEspecialidad(@Param('Id', ParseIntPipe) idEspecialidad: number) {
+    return this.ingresosService.find_especialidad(idEspecialidad)
   }
 
   @Get(':id')

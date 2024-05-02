@@ -15,8 +15,13 @@ export class IngresosRepository implements IIngresosRepository {
         const data = await this.repository.find({ where: { de_alta: false } })
         return data.map((dbm) => IngresoMapper.toDomain(dbm));
     }
-    async asignados_enfermera(matricula_enf: string): Promise<Ingreso[]> {
+    async find_asignados_enfermera(matricula_enf: string): Promise<Ingreso[]> {
         const data = await this.repository.find({ where: { id_enfermera: { matriculaEnfermera: matricula_enf }, de_alta: false } })
+        return data.map((dbm) => IngresoMapper.toDomain(dbm));
+    }
+
+    async find_especialidad(id_especialidad: number): Promise<Ingreso[]> {
+        const data = await this.repository.find({ where: { id_especialidad: { id: id_especialidad } } })
         return data.map((dbm) => IngresoMapper.toDomain(dbm));
     }
     async save(modelodb: Ingreso): Promise<Ingreso> {
