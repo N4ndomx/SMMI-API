@@ -6,6 +6,7 @@ import { EspecialidadModel } from './infra/persistencia/models/especialidades.mo
 export class EspecialidadMapper {
   static toPersistencia(entity: Especialidad): EspecialidadModel {
     let model = new EspecialidadModel();
+    model.id = entity.id ?? null
     model.nombre_especialidad = entity.nombre;
     model.descipcion = entity.descripcion;
     return model;
