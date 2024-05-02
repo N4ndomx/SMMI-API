@@ -1,3 +1,5 @@
+import { fail } from "assert"
+
 export class Habitacion {
 
     id_habitacion?: number
@@ -6,5 +8,8 @@ export class Habitacion {
 
     public ocupar_habitacion() {
         this.ocupado = true
+    }
+    public desocupar_habitacion() {
+        this.ocupado = false
     }
 }
