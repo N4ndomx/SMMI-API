@@ -77,7 +77,7 @@ export class MedicosService {
   }
 
   async _getMedicoByTermino(termino: OpcionFiedOne, transactionRunner?: ITransactionRunner) {
-    let medico = null;
+    let medico: Medico = null;
     if (termino.type === TIPO_BUSQUEDA.CURP) {
       medico = await this.medicoRepo.findByCURP(termino.value, transactionRunner);
     } else {
