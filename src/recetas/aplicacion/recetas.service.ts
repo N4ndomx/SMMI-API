@@ -35,9 +35,6 @@ export class RecetasService {
     }
   }
 
-  findAll() {
-    return `This action returns all recetas`;
-  }
 
   async findOneByIngreso(id: string) {
     const ingreso = await this.ingresoService.findOne(id);
@@ -46,11 +43,5 @@ export class RecetasService {
     return recetas
   }
 
-  update(id: number, updateRecetaDto: UpdateRecetaDto) {
-    return `This action updates a #${id} receta`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} receta`;
-  }
 }
