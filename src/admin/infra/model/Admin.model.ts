@@ -21,7 +21,7 @@ export class AdminModel {
     nivel_educacion: string
 
 
-    @OneToOne(() => EmpleadoModel, { cascade: true })
+    @OneToOne(() => EmpleadoModel, { cascade: true, eager: true })
     @JoinColumn({ name: 'idEmpleado' })
     empleado: EmpleadoModel;
 }
