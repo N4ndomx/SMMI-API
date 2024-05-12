@@ -1,5 +1,6 @@
 import { EspecialidadModel } from 'src/especialidades/infra/persistencia/models/especialidades.model';
 import { Medico_Especialidad_Model } from 'src/especialidades/infra/persistencia/models/medico-especialidad.model';
+import { RecetaModel } from 'src/recetas/infra/model/receta.model';
 import { EmpleadoModel } from 'src/shared/models/empleado.model';
 import {
   Column,
@@ -35,4 +36,7 @@ export class MedicoModel {
     }
   )
   especialidades: Medico_Especialidad_Model[]
+
+  @OneToMany(() => RecetaModel, type => type.medico)
+  recetas: RecetaModel[]
 }
