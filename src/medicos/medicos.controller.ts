@@ -3,9 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
 } from '@nestjs/common';
 import { MedicosService } from './aplicacion/medicos.service';
 import { CreateMedicoDto } from './aplicacion/dto/create-medico.dto';
@@ -26,9 +24,16 @@ export class MedicosController {
     return this.medicosService.findAll();
   }
 
+
   @Get(':termino')
   findOne(@Param('termino', TerminoValidate) termino: OpcionFiedOne) {
     // console.log(termino)
     return this.medicosService.findOne(termino);
   }
+
+  @Get(":id/ingresos")
+  findIngresosByDoctor(@Param('id',) id: string) {
+    return this.medicosService.getIngresosByDoctor(id);
+  }
+
 }

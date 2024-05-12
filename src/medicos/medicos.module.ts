@@ -9,12 +9,14 @@ import { MedicoMapper } from './medicos.mapper';
 import { IMapperToken } from 'src/shared/interfaces/mapper.interface';
 import { IMedicoRepositoryToken } from './domain/interfaces/medico-repository.interface';
 import { EspecialidadesModule } from 'src/especialidades/especialidades.module';
+import { IngresosModule } from 'src/ingresos/ingresos.module';
 
 @Module({
   imports: [
     SharedModule,
     TypeOrmModule.forFeature([MedicoModel]),
     EspecialidadesModule,
+    IngresosModule
   ],
   controllers: [MedicosController],
   providers: [

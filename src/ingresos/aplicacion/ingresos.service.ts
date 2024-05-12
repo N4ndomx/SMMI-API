@@ -85,10 +85,7 @@ export class IngresosService {
     return rest
   }
 
-  async find_especialidad(id_especialidad: number) {
-    return await this.ingresosRepository.find_especialidad(id_especialidad)
 
-  }
 
   async dar_alta(id: string) {
     try {
@@ -108,5 +105,15 @@ export class IngresosService {
 
   remove(id: number) {
     return `This action removes a #${id} ingreso`;
+  }
+
+  async findByEspecialidad(id_especialidad: number) {
+    const esp = await this.especialidadService.findOne(id_especialidad)
+    const ingresos = await this.ingresosRepository.findByEspecialidad(esp.id)
+    return ingresos
+  }
+  async findByNombres(nombres: string) {
+    console.log(nombres)
+    return await this.ingresosRepository.findByNombreCompleto(nombres)
   }
 }
