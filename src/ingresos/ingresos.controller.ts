@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, ParseIntPipe, Query } from '@nestjs/common';
 import { IngresosService } from './aplicacion/ingresos.service';
 import { CreateIngresoDto } from './aplicacion/dto/create-ingreso.dto';
 
@@ -15,6 +15,10 @@ export class IngresosController {
   async findAll() {
     return await this.ingresosService.findAll();
   }
+  @Get('/busq')
+  async findbyNombre(@Query('nombre') nombreCompleto: string) {
+    return this.ingresosService.findByNombres(nombreCompleto)
+  }
   @Get("/activos")
   async findAllSinAlta() {
     return await this.ingresosService.findAllSinAlta()
@@ -27,7 +31,7 @@ export class IngresosController {
 
   @Get('especialidad/:Id')
   getByEspecialidad(@Param('Id', ParseIntPipe) idEspecialidad: number) {
-    return this.ingresosService.find_especialidad(idEspecialidad)
+    return this.ingresosService.findByEspecialidad(idEspecialidad)
   }
 
   @Get(':id')

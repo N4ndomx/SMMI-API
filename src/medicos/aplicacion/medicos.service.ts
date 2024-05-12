@@ -18,6 +18,7 @@ import { Errores_MEDICO } from 'src/shared/helpers/medicos.helper';
 import { ITransactionRunner } from 'src/shared/interfaces/TransactionFactory/transactions.interface';
 import { EspecialidadesService } from 'src/especialidades/applicacion/especialidades.service';
 import { Especialidad } from 'src/especialidades/domain/entities/especialidade.entity';
+import { IngresosService } from 'src/ingresos/aplicacion/ingresos.service';
 
 @Injectable()
 export class MedicosService {
@@ -25,6 +26,7 @@ export class MedicosService {
     private readonly especialidadService: EspecialidadesService,
     @Inject(IMedicoRepositoryToken)
     private readonly medicoRepo: IMedicoRepository,
+    private ingresoService: IngresosService
   ) { }
   async create(createMedicoDto: CreateMedicoDto, transactionRunner?: ITransactionRunner) {
 
@@ -77,7 +79,7 @@ export class MedicosService {
   }
 
   async _getMedicoByTermino(termino: OpcionFiedOne, transactionRunner?: ITransactionRunner) {
-    let medico = null;
+    let medico: Medico = null;
     if (termino.type === TIPO_BUSQUEDA.CURP) {
       medico = await this.medicoRepo.findByCURP(termino.value, transactionRunner);
     } else {
@@ -88,6 +90,15 @@ export class MedicosService {
 
   async findAll() {
     return await this.medicoRepo.findAll();
+  }
+
+  async getIngresosByDoctor(id_medico: string) {
+    const medico = await this.findOne({ type: TIPO_BUSQUEDA.MATRICULA, value: id_medico })
+    const promesIngresos = medico.especialidades.map(async (esp) => {
+      return await this.ingresoService.findByEspecialidad(esp.id)
+    })
+
+    return Promise.all(promesIngresos)
   }
 
 

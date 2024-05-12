@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { CatalogoSensoresModel } from './catalogo-sensores.model';
 import { HabitacionModel } from 'src/habitaciones/infra/persistencia/models/habitaciones.model';
 
@@ -7,8 +7,8 @@ export class SensorDataModel {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date' })
-    fecha_registro: Date;
+    @CreateDateColumn()
+    fecha_registro: Date
 
     @Column('float')
     valor_registrado: number;
