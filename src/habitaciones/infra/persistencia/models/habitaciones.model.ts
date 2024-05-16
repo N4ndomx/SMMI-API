@@ -1,3 +1,4 @@
+import { ConfigSensorModel } from "src/config_sensores/infra/persistencia/models/config_sensores.model";
 import { SensorDataModel } from "src/sensores/infra/persistencia/models/sensor.model";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -12,4 +13,6 @@ export class HabitacionModel {
 
     @OneToMany(() => SensorDataModel, (model) => model.topico_sensor)
     dataSensor: SensorDataModel[]
+    @OneToMany(() => ConfigSensorModel, (model) => model.habitacion, { cascade: true, eager: true })
+    config_sensores: ConfigSensorModel[]
 }

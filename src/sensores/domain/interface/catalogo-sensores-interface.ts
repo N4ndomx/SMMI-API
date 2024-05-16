@@ -5,4 +5,5 @@ import { CatalogoSensor } from "../entities/catalogo-sensor.entity";
 
 export const ICatalogoSensorRepositoryToken = Symbol('ICatalogoSensorRepository');
 export interface ICatalogoSensorRepository extends IRepository<CatalogoSensor, number> {
+    findByTopico(topico: string): Promise<CatalogoSensor>
 }
