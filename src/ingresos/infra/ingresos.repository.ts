@@ -50,7 +50,10 @@ export class IngresosRepository implements IIngresosRepository {
     async findAll(): Promise<Ingreso[]> {
         const data = await this.repository.find()
 
-        return data.map((dbm) => IngresoMapper.toDomain(dbm));
+        return data.map((dbm) => {
+            dbm.id_habitacion.config_sensores = null
+            return IngresoMapper.toDomain(dbm)
+        });
 
     }
     async update(id: string, modelodb: Ingreso): Promise<boolean> {

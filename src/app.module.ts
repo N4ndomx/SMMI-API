@@ -12,6 +12,7 @@ import { HabitacionesModule } from './habitaciones/habitaciones.module';
 import { AdminModule } from './admin/admin.module';
 import { IngresosModule } from './ingresos/ingresos.module';
 import { RecetasModule } from './recetas/recetas.module';
+import { ConfigSensoresModule } from './config_sensores/config_sensores.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { RecetasModule } from './recetas/recetas.module';
     HabitacionesModule,
     AdminModule,
     IngresosModule,
-    RecetasModule
+    RecetasModule,
+    ConfigSensoresModule
   ],
   controllers: [],
   providers: [],
