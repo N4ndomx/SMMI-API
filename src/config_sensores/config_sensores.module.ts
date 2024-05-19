@@ -11,6 +11,7 @@ import { ConfigSensorRepository } from './infra/persistencia/config_sensor.repos
 import { ICatalogoSensorRepositoryToken } from 'src/sensores/domain/interface/catalogo-sensores-interface';
 import { CatalogoSensoresRepository } from 'src/sensores/infra/persistencia/catalogo-sensores.repository';
 import { IConfigSensorRepository } from './dominio/interface/config_sensor-repo.interface';
+import { MqttModule } from 'src/mqtt/mqtt.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { IConfigSensorRepository } from './dominio/interface/config_sensor-repo.
     SharedModule,
     HabitacionesModule,
     SensoresModule,
+    MqttModule
   ],
   controllers: [ConfigSensoresController],
   providers: [ConfigSensoresService, ConfigSensorRepository, {

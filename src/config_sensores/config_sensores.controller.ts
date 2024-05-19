@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ConfigSensoresService } from './aplicacion/config_sensores.service';
 import { CreateConfigSensoreDto } from './aplicacion/dto/create-config_sensore.dto';
 import { UpdateConfigSensoreDto } from './aplicacion/dto/update-config_sensore.dto';
@@ -10,6 +10,11 @@ export class ConfigSensoresController {
   @Post()
   create(@Body() createConfigSensoreDto: CreateConfigSensoreDto) {
     return this.configSensoresService.create(createConfigSensoreDto);
+  }
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id_hab: number) {
+    // console.log(termino)
+    return this.configSensoresService.finByHabitacion(id_hab);
   }
 
   @Delete(':id')

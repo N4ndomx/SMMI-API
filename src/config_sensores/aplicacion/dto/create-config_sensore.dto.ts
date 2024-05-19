@@ -1,6 +1,19 @@
-import { IsNumber, IsPositive, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsNumber, IsPositive, IsString, Validate, ValidateNested } from "class-validator";
+import { topicoUnico } from "./validates/topicoValidate.methdo";
 
 export class CreateConfigSensoreDto {
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Validate(topicoUnico)
+    @Type(() => ConfigSensorDTO)
+    config: ConfigSensorDTO[]
+    @IsNumber()
+    @IsPositive()
+    id_habitacion: number;
+}
+
+export class ConfigSensorDTO {
     @IsNumber({ maxDecimalPlaces: 0 })
     @IsPositive()
     max_valor: number
@@ -9,7 +22,5 @@ export class CreateConfigSensoreDto {
     min_valor: number
     @IsString()
     topico_sensor: string
-    @IsNumber()
-    @IsPositive()
-    id_habitacion: number;
+
 }

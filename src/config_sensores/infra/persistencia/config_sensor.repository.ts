@@ -11,6 +11,11 @@ export class ConfigSensorRepository implements IConfigSensorRepository {
         @InjectRepository(ConfigSensorModel)
         private repository: Repository<ConfigSensorModel>
     ) { }
+    findByHabitacion(id_habitacion: number): Promise<ConfigSensor[]> {
+        const config = this.repository.find({ where: { habitacion: { id_habitacion: id_habitacion } } })
+
+        return config
+    }
 
     async save(modelodb: ConfigSensor): Promise<ConfigSensor> {
         const { ishabitacion, ...data } = modelodb
@@ -19,7 +24,6 @@ export class ConfigSensorRepository implements IConfigSensorRepository {
             ...data,
             habitacion: HabitacionMapper.toPersistencia(ishabitacion)
         })
-        console.log(habitacion)
 
 
         return {

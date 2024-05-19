@@ -3,5 +3,5 @@ import { IRepository } from "src/shared/interfaces/repository.interface";
 
 export const IConfigSensorRepository = Symbol('IConfigSensorRepository');
 export interface IConfigSensorRepository extends IRepository<ConfigSensor, string> {
-
+    findByHabitacion(id_habitacion: number): Promise<ConfigSensor[]>
 }
