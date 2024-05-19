@@ -19,12 +19,6 @@ export class MqttService {
             this.logger.log('Connected to MQTT server');
         });
 
-        this.mqtt.subscribe('/from-device',);
-
-        this.mqtt.on('message', function (topic, message) {
-            console.log('New message received!');
-            console.log(message.toString());
-        });
     }
 
 
