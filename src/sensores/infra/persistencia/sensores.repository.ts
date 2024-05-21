@@ -1,4 +1,4 @@
-import { EntityManager, Repository } from 'typeorm';
+import { Between, EntityManager, Repository } from 'typeorm';
 import { Inject, Injectable } from '@nestjs/common';
 import { SensorDataModel } from './models/sensor.model';
 import { ISensorDataRepository } from 'src/sensores/domain/interface/sensores-interface';
@@ -13,6 +13,29 @@ export class SensoresDataRepository implements ISensorDataRepository {
         private readonly repository: Repository<SensorDataModel>
 
     ) { }
+    async findDataBySensor(id_habitacion: number, topico: string, fecha_init?: string, fecha_end?: string): Promise<SensorData[]> {
+
+        const res = await this.repository
+            .createQueryBuilder('datasensor')
+            .innerJoinAndSelect('datasensor.habitacion', 'Habitaciones')
+            .innerJoinAndSelect('datasensor.sensor', 'Catalogo_Sensores')
+            .where("Habitaciones.id_habitacion = :idh", { idh: id_habitacion })
+            .andWhere("Catalogo_Sensores.topico = :t", { t: topico })
+            // .andWhere("CAST(datasensor.fecha_registro as date) BETWEEN :init  AND :end", { init: fecha_init ?? null, end: fecha_end ?? null })
+            .getMany();
+        // console.log(ingresos)
+
+        // const res = await this.repository.find(
+        //     {
+
+        //         where: {
+        //             fecha_registro: Between(new Date(fecha_init).toISOString(), new Date(fecha_end).toISOString()),
+
+        //             habitacion: { id_habitacion: id_habitacion }, sensor: { topico: topico }
+        //         }
+        //     })
+        return res ? res.map((r) => SensorDataMapper.toDomain(r)) : null
+    }
     async save(modelodb: SensorData): Promise<SensorData> {
         const db = SensorDataMapper.toPersistencia(modelodb)
         const res = await this.repository.save(db)
@@ -22,8 +45,10 @@ export class SensoresDataRepository implements ISensorDataRepository {
         const res = await this.repository.findOneBy({ id: id })
         return res ? SensorDataMapper.toDomain(res) : null
     }
-    findAll(): Promise<SensorData[]> {
-        throw new Error('Method not implemented.');
+    async findAll(): Promise<SensorData[]> {
+        const res = await this.repository.find()
+        console.log(res)
+        return res ? res.map((r) => SensorDataMapper.toDomain(r)) : null
     }
     update(id: number, modelodb: SensorData): Promise<boolean> {
         throw new Error('Method not implemented.');

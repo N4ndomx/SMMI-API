@@ -4,4 +4,5 @@ import { SensorData } from "../entities/sensore.entity";
 
 export const ISensorDataRepositoryToken = Symbol('ISensorRepository');
 export interface ISensorDataRepository extends IRepository<SensorData, number> {
+    findDataBySensor(id_habitacion: number, topico: string, fecha_init?: string, fecha_end?: string): Promise<SensorData[]>
 }

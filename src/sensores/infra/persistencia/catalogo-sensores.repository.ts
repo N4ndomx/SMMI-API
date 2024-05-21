@@ -15,7 +15,7 @@ export class CatalogoSensoresRepository implements ICatalogoSensorRepository {
 
     ) { }
     async findByTopico(topico: string): Promise<CatalogoSensor> {
-        const res = await this.repository.findOneBy({ nombre_topico: topico })
+        const res = await this.repository.findOneBy({ topico: topico })
         return res ? CatalogoSensorMapper.toDomain(res) : null
     }
     async save(modelodb: CatalogoSensor): Promise<CatalogoSensor> {
