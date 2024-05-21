@@ -7,7 +7,7 @@ export class MqttService {
     private logger = new Logger('MqttService')
     constructor() {
         this.mqtt = connect(process.env.connectMQTTUrl, {
-            host: "localhost",
+            host: process.env.ipHostmqtt || "locahost",
             protocol: 'mqtt',
             clientId: process.env.clientId || null,
             clean: true,
