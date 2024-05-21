@@ -11,7 +11,7 @@ export class HabitacionModel {
     @Column('boolean', { default: false })
     ocupado: boolean
 
-    @OneToMany(() => SensorDataModel, (model) => model.topico_sensor)
+    @OneToMany(() => SensorDataModel, (model) => model.sensor)
     dataSensor: SensorDataModel[]
     @OneToMany(() => ConfigSensorModel, (model) => model.habitacion, { cascade: true, eager: true })
     config_sensores: ConfigSensorModel[]
