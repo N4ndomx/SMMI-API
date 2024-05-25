@@ -27,6 +27,14 @@ import { HabitacionesModule } from 'src/habitaciones/habitaciones.module';
       provide: ICatalogoSensorRepositoryToken,
       useExisting: CatalogoSensoresRepository
     }
-  ]
+  ],
+  exports: [CatalogoSensoresRepository, {
+    provide: ICatalogoSensorRepositoryToken,
+    useExisting: CatalogoSensoresRepository
+  },
+    {
+      provide: ISensorDataRepositoryToken,
+      useExisting: SensoresDataRepository
+    }]
 })
 export class SensoresModule { }

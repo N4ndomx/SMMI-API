@@ -85,6 +85,14 @@ export class IngresosService {
     return rest
   }
 
+  async findByHab(id_hab: number) {
+    const rest = await this.ingresosRepository.findByHab(id_hab)
+    if (!rest) {
+      throw new Error('Ingreso no encontrado')
+    }
+    return rest
+  }
+
 
 
   async dar_alta(id: string) {

@@ -13,8 +13,9 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
       password: process.env.DATABASE_PASSWORD,
       username: process.env.DATABASE_USERNAME,
       autoLoadEntities: true,
+      logger: 'debug',
       extra: {
-        ssl: true,
+        ssl: false,
         sslmode: 'require',
       },
       synchronize: true,

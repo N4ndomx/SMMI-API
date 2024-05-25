@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Req, ParseIntPipe, Query } from '@nestjs/common';
 import { SensoresDataService } from './aplicacion/sensores.service';
 import { UpdateSensoreDto } from './aplicacion/dto/update-sensore.dto';
 import { EmqxTransfrormPipe } from 'src/sensores/infra/pipes/emqx.transform.pipe';
@@ -11,13 +11,29 @@ export class SensoresController {
   create(@Body(EmqxTransfrormPipe) body: any) {
     return this.sensoresService.create(body)
   }
+  @Get()
+  findAll() {
+    return this.sensoresService.findAllData();
+  }
   @Get("/seed")
   create_sensor(body: any) {
     return this.sensoresService.create_catalogo_sensores()
   }
   @Get("/catalogo")
-  findAll() {
-    return this.sensoresService.findAll();
+  findAllCatalogo() {
+    return this.sensoresService.findAllCatalogo();
   }
+  @Get("/estadi")
+  findDataBySensor(
+    @Query('topico') topico: string,
+    @Query('habitacion') id_hab: number,
+    @Query('fechainit') fecha_init: string,
+    @Query('fechaend') fecha_end: string,
+    @Query('hinit') h_init: string,
+    @Query('hend') h_end: string,
+  ) {
+    return this.sensoresService.findDataBySensor(id_hab, topico, fecha_init, fecha_end, h_init, h_end)
+  }
+
 
 }

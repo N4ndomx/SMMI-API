@@ -9,10 +9,10 @@ export class CatalogoSensoresModel {
     @Column('varchar', { unique: true })
     nombre_sensor: string;
     @Column('varchar', { unique: true })
-    nombre_topico: string;
+    topico: string;
     @Column('varchar')
     unidad_medida: string;
 
-    @OneToMany(() => SensorDataModel, (model) => model.topico_sensor)
+    @OneToMany(() => SensorDataModel, (model) => model.sensor)
     dataSendor: SensorDataModel[]
 }

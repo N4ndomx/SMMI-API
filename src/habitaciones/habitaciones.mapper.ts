@@ -7,7 +7,7 @@ export class HabitacionMapper {
         domain.id_habitacion = model.id_habitacion
         domain.nombre_habitacion = model.nombre_habitacion
         domain.ocupado = model.ocupado
-
+        domain.config_sensores = model.config_sensores ? model.config_sensores : undefined
         return domain;
     }
 

@@ -6,7 +6,7 @@ export class CatalogoSensorMapper {
         const domain: CatalogoSensor = {
             id: model.id,
             nombre: model.nombre_sensor,
-            topico: model.nombre_topico,
+            topico: model.topico,
             unidad_medida: model.unidad_medida
         };
         return domain;
@@ -15,7 +15,7 @@ export class CatalogoSensorMapper {
     static toPersistencia(domain: CatalogoSensor): CatalogoSensoresModel {
         const model = new CatalogoSensoresModel();
         model.id = domain.id;
-        model.nombre_topico = domain.topico
+        model.topico = domain.topico
         model.nombre_sensor = domain.nombre;
         model.unidad_medida = domain.unidad_medida
         return model;

@@ -7,15 +7,15 @@ export class SensorDataModel {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @CreateDateColumn()
-    fecha_registro: Date
+    @CreateDateColumn({ type: 'timestamptz' })
+    fecha_registro: string
 
     @Column('float')
     valor_registrado: number;
 
     @ManyToOne(() => CatalogoSensoresModel, (model) => model.dataSendor, { eager: true })
     @JoinColumn({ name: 'id_catalogo_sensor' })
-    topico_sensor: CatalogoSensoresModel;
+    sensor: CatalogoSensoresModel;
 
     @ManyToOne(() => HabitacionModel, (model) => model.id_habitacion, { eager: true })
     @JoinColumn({ name: 'id_habitacion' })
