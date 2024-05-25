@@ -29,8 +29,11 @@ export class SensoresController {
     @Query('habitacion') id_hab: number,
     @Query('fechainit') fecha_init: string,
     @Query('fechaend') fecha_end: string,
+    @Query('hinit') h_init: string,
+    @Query('hend') h_end: string,
   ) {
-    return this.sensoresService.findDataBySensor(id_hab, topico, fecha_init, fecha_end)
+    return this.sensoresService.findDataBySensor(id_hab, topico, fecha_init, fecha_end, h_init, h_end)
   }
+
 
 }

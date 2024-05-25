@@ -4,7 +4,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Habitaciones")
 export class HabitacionModel {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id_habitacion: number
     @Column('varchar')
     nombre_habitacion: string

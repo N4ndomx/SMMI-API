@@ -10,7 +10,7 @@ export class SensorDataMapper {
             id: model.id,
             fecha_registro: new DateValue(new Date(model.fecha_registro)),
             valor_registrado: model.valor_registrado,
-            sensor: CatalogoSensorMapper.toDomain(model.sensor),
+            sensor: model.sensor ? CatalogoSensorMapper.toDomain(model.sensor) : null,
             habitacion: HabitacionMapper.toDomain(model.habitacion)
         };
         return domain;

@@ -11,6 +11,10 @@ export class IngresosRepository implements IIngresosRepository {
         @InjectRepository(IngresoModel)
         private readonly repository: Repository<IngresoModel>
     ) { }
+    async findByHab(id_hab: number): Promise<Ingreso> {
+        const res = await this.repository.findOne({ where: { habitacion: { id_habitacion: id_hab }, de_alta: false } });
+        return res ? IngresoMapper.toDomain(res) : null;
+    }
     async findByNombreCompleto(nombres: string): Promise<Ingreso[]> {
         const ingresos = await this.repository
             .createQueryBuilder('ingresos')
@@ -51,7 +55,7 @@ export class IngresosRepository implements IIngresosRepository {
         const data = await this.repository.find()
 
         return data.map((dbm) => {
-            dbm.id_habitacion.config_sensores = null
+            dbm.habitacion.config_sensores = null
             return IngresoMapper.toDomain(dbm)
         });
 

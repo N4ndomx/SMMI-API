@@ -5,9 +5,8 @@ import { SensorData } from '../domain/entities/sensore.entity';
 import { ICatalogoSensorRepository, ICatalogoSensorRepositoryToken } from '../domain/interface/catalogo-sensores-interface';
 import { CatalogoSensor } from '../domain/entities/catalogo-sensor.entity';
 import { DateValue } from 'src/shared/VO/fecha.vo';
-import { HabitacionesRepository } from 'src/habitaciones/infra/persistencia/habitaciones.repository';
 import { IHabitacionRepository, IHabitacionRepositoryToken } from 'src/habitaciones/domain/interface/habitacion-repository.interface';
-import { roundToNearestMinutes, startOfMinute } from 'date-fns';
+import { roundToNearestMinutes, } from 'date-fns';
 @Injectable()
 export class SensoresDataService {
 
@@ -33,18 +32,18 @@ export class SensoresDataService {
       }
       const newSensor = new SensorData();
       newSensor.fecha_registro = new DateValue(new Date())
-      console.log(newSensor.fecha_registro.value)
+      // console.log(newSensor.fecha_registro.value)
 
       newSensor.sensor = sensor
       newSensor.habitacion = hab
       newSensor.valor_registrado = createSensoreDto.payload.valor
-      console.log(hab)
+      // console.log(hab)
 
       const { fecha_registro, ...data } = await this.repoSensor.save(newSensor)
-      console.log({
-        ...data,
-        fecha: fecha_registro.format()
-      })
+      // console.log({
+      //   ...data,
+      //   fecha: fecha_registro.format()
+      // })
       return { result: "ok", message: "success" }
     } catch (error) {
       console.log(error)
@@ -105,25 +104,30 @@ export class SensoresDataService {
   }
 
 
-  async findDataBySensor(id_habitacion: number, topico: string, fecha_init?: string, fecha_end?: string) {
+  async findDataBySensor(id_habitacion: number, topico?: string, fecha_init?: string, fecha_end?: string, h_init?: string, h_end?: string) {
     // console.log(fecha_init, fecha_end)
     // const utcDate = new Date(fecha_init);
     // console.log(utcDate)
     // console.log(utcDate.toISOString());
-
-    const sensor = await this.repoCatalogoSensor.findByTopico(topico)
+    const sensor = await this.repoCatalogoSensor.findByTopico(topico ?? "")
     if (!sensor) {
       throw new BadRequestException("No se encontro sensor con topico: " + topico)
     }
-    const datarepo = await this.repoSensor.findDataBySensor(id_habitacion, sensor.topico, fecha_init, fecha_end)
-    // let series: any[] = []
+    const datarepo = await this.repoSensor.findDataBySensor({
+      id_habitacion: id_habitacion,
+      topico: sensor.topico,
+      fecha_init,
+      fecha_end,
+      hora_init: h_init,
+      hora_end: h_end,
+    })
     let data: number[] = []
     let categories: any[] = []
 
 
     const grouped = {};
     datarepo.forEach((value) => {
-      const roundedDate = roundToNearestMinutes(new Date(value.fecha_registro.value), { nearestTo: 5 }); // Redondear al intervalo de 15 minutos mas cercano
+      const roundedDate = roundToNearestMinutes(new Date(value.fecha_registro.value), { nearestTo: 3 }); // Redondear al intervalo de 15 minutos mas cercano
       const key = roundedDate.toISOString();
       if (!grouped[key]) {
         categories.push(roundedDate.toLocaleTimeString());
@@ -138,7 +142,7 @@ export class SensoresDataService {
       data.push(+(grouped[key].sum / grouped[key].count).toFixed(2))
       grouped[key] = +(grouped[key].sum / grouped[key].count).toFixed(2);
     }
-    console.log(grouped)
+    console.log(grouped, datarepo.length)
     return {
       sensor: sensor,
       series: [{
@@ -150,6 +154,18 @@ export class SensoresDataService {
 
   }
 
+  async findData(id_habitacion: number, topico?: string, fecha_init?: string, fecha_end?: string, h_init?: string, h_end?: string) {
+    //   console.log(new Date(h_init).toISOString())
+    //   const datarepo = await this.repoSensor.findDataBySensor({
+    //     id_habitacion: id_habitacion,
+    //     topico: topico,
+    //     fecha_init,
+    //     fecha_end,
+    //     hora_init: new Date(h_init),
+    //     hora_end: new Date(h_end)
+    //   })
+    //   return datarepo
+  }
 
 
 }

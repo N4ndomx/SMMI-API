@@ -7,5 +7,6 @@ export interface IIngresosRepository extends IRepository<Ingreso, string> {
     find_asignados_enfermera(matricula_enf: string): Promise<Ingreso[]>
     findByEspecialidad(id_especialidad: number): Promise<Ingreso[]>
     findByNombreCompleto(nombres: string): Promise<Ingreso[]>
+    findByHab(id_hab: number): Promise<Ingreso>
 
 }

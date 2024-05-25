@@ -1,9 +1,10 @@
+import { ReporteAlertaModel } from "src/alertas-reportes/infra/model/reporte-alerta.model";
 import { EnfermeraModel } from "src/enfermeras/infra/persistencia/models/enfermera.model";
 import { EspecialidadModel } from "src/especialidades/infra/persistencia/models/especialidades.model";
 import { HabitacionModel } from "src/habitaciones/infra/persistencia/models/habitaciones.model";
 import { CatalogoSensoresModel } from "src/sensores/infra/persistencia/models/catalogo-sensores.model";
 import { GENERO } from "src/shared/helpers/generos.helper";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('Ingresos')
 export class IngresoModel {
@@ -50,5 +51,8 @@ export class IngresoModel {
     id_especialidad: EspecialidadModel;
 
     @ManyToOne(type => HabitacionModel, { eager: true, cascade: true, onUpdate: "CASCADE" })
-    id_habitacion: HabitacionModel;
+    habitacion: HabitacionModel;
+
+    @OneToMany(() => ReporteAlertaModel, (m) => m.ingreso)
+    reportes_alerta: ReporteAlertaModel
 }

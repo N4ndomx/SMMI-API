@@ -14,6 +14,7 @@ import { IngresosModule } from './ingresos/ingresos.module';
 import { RecetasModule } from './recetas/recetas.module';
 import { ConfigSensoresModule } from './config_sensores/config_sensores.module';
 import { MqttModule } from './mqtt/mqtt.module';
+import { AlertasReportesModule } from './alertas-reportes/alertas-reportes.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { MqttModule } from './mqtt/mqtt.module';
     IngresosModule,
     RecetasModule,
     ConfigSensoresModule,
-    MqttModule
+    MqttModule,
+    AlertasReportesModule
   ],
   controllers: [],
   providers: [],

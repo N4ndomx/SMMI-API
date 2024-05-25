@@ -16,7 +16,7 @@ export class IngresoMapper {
             dbModel.alergias,
             dbModel.causa_ingreso,
             EspecialidadMapper.toDomain(dbModel.id_especialidad),
-            HabitacionMapper.toDomain(dbModel.id_habitacion),
+            HabitacionMapper.toDomain(dbModel.habitacion),
             dbModel.id_ingreso,
             dbModel.fecha_actualizacion,
             dbModel.fecha_ingreso,
@@ -59,7 +59,7 @@ export class IngresoMapper {
 
 
 
-        model.id_habitacion = HabitacionMapper.toPersistencia(domain.id_habitacion);
+        model.habitacion = HabitacionMapper.toPersistencia(domain.id_habitacion);
 
 
         return model;

@@ -25,6 +25,9 @@ import { IIngresosRepositoryToken } from './domain/interfaces/ingresos-repositor
       useExisting: IngresosRepository,
     }
   ],
-  exports: [IngresosService, IngresosRepository]
+  exports: [IngresosService, IngresosRepository, {
+    provide: IIngresosRepositoryToken,
+    useExisting: IngresosRepository,
+  }]
 })
 export class IngresosModule { }
