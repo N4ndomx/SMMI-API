@@ -58,15 +58,15 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Despliege local
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Ejecuta el doker-compose y luego desde el dashboard de EMQX configura el webhook de la siguiente manera 
 
-## Stay in touch
+```bash
+$ docker-compose up -d 
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+![image](https://github.com/N4ndomx/SMMI-API/assets/90127607/74da0eca-489c-4d7e-95a7-5abd88958454)
 
 ## License
 
