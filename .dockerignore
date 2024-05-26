@@ -1,0 +1,12 @@
+/dist
+/node_modules
+/build
+/postgres
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+# .env
+thunder-collection_SMMI_postman.json
+docker-compose.yaml
