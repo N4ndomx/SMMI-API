@@ -38,6 +38,9 @@ services:
       - app_net
 
   backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: n4ndomx/apismmired:latest
     container_name: api-rest
     restart: always

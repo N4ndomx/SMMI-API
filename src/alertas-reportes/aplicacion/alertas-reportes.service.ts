@@ -213,7 +213,9 @@ export class AlertasReportesService {
 
     await this.repository.update(id, reporteAlerta)
 
-    return `This action updates a #${id} alertasReporte`;
+    return {
+      status: "ok"
+    };
   }
 
 
