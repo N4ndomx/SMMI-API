@@ -18,7 +18,7 @@ export class IngresosRepository implements IIngresosRepository {
     async findByNombreCompleto(nombres: string): Promise<Ingreso[]> {
         const ingresos = await this.repository
             .createQueryBuilder('ingresos')
-            .innerJoinAndSelect('ingresos.id_habitacion', 'Habitaciones')
+            .innerJoinAndSelect('ingresos.habitacion', 'Habitaciones')
             .innerJoinAndSelect('ingresos.id_enfermera', 'Enfermeras')
             .innerJoinAndSelect('Enfermeras.empleado', 'Empleados')
             .innerJoinAndSelect('ingresos.id_especialidad', 'Catalogo_Especialidades')
