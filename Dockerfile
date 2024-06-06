@@ -18,6 +18,7 @@ RUN npm run build
 FROM node:18.18.0-alpine3.18 AS runner
 
 # Set working directory
+ENV TZ=America/Mexico_City 
 WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
