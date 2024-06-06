@@ -89,7 +89,7 @@ export class AlertasReportesService {
       this.emergencies.delete(room);
       console.log(`Emergency record for room ${room} almecenado para reportar.`);
 
-    }, 0.2 * 60 * 1000);
+    }, 1 * 60 * 1000);
 
     const record = this.emergencies.get(room);
     if (record) {
