@@ -120,8 +120,8 @@ export class IngresosService {
     const ingresos = await this.ingresosRepository.findByEspecialidad(esp.id)
     return ingresos
   }
-  async findByNombres(nombres: string) {
-    console.log(nombres)
-    return await this.ingresosRepository.findByNombreCompleto(nombres)
+  async findByNombres(nombres: string, id_especialidad: string) {
+    // console.log(nombres)
+    return await this.ingresosRepository.findByNombreCompleto(nombres, +id_especialidad)
   }
 }

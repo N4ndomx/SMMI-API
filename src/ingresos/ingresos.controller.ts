@@ -16,8 +16,9 @@ export class IngresosController {
     return await this.ingresosService.findAll();
   }
   @Get('/busq')
-  async findbyNombre(@Query('nombre') nombreCompleto: string) {
-    return this.ingresosService.findByNombres(nombreCompleto)
+  async findbyNombre(@Query('nombre') nombreCompleto: string,
+    @Query('id_esp') idesp: string) {
+    return this.ingresosService.findByNombres(nombreCompleto, idesp)
   }
   @Get("/activos")
   async findAllSinAlta() {

@@ -15,8 +15,8 @@ export class IngresosRepository implements IIngresosRepository {
         const res = await this.repository.findOne({ where: { habitacion: { id_habitacion: id_hab }, de_alta: false } });
         return res ? IngresoMapper.toDomain(res) : null;
     }
-    async findByNombreCompleto(nombres: string): Promise<Ingreso[]> {
-        const ingresos = await this.repository
+    async findByNombreCompleto(nombres: string, id_esp: number): Promise<Ingreso[]> {
+        const query = this.repository
             .createQueryBuilder('ingresos')
             .innerJoinAndSelect('ingresos.habitacion', 'Habitaciones')
             .innerJoinAndSelect('ingresos.id_enfermera', 'Enfermeras')
@@ -24,8 +24,13 @@ export class IngresosRepository implements IIngresosRepository {
             .innerJoinAndSelect('ingresos.id_especialidad', 'Catalogo_Especialidades')
 
             .where("CONCAT(ingresos.nombres, ' ', ingresos.apellidos) = :nombreCompleto", { nombreCompleto: nombres })
-            .getMany();
-        console.log(ingresos)
+        if (id_esp) {
+            console.log(' si hay ')
+            query.andWhere("ingresos.id_especialidad = :esp", { esp: id_esp })
+        }
+
+        // console.log(ingresos)
+        const ingresos = await query.getMany();
         return ingresos.map((dbm) => IngresoMapper.toDomain(dbm));
     }
     async findAll_No_Alta(): Promise<Ingreso[]> {
