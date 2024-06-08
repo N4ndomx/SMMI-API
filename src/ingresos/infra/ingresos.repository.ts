@@ -25,7 +25,7 @@ export class IngresosRepository implements IIngresosRepository {
 
             .where("CONCAT(ingresos.nombres, ' ', ingresos.apellidos) = :nombreCompleto", { nombreCompleto: nombres })
         if (id_esp) {
-            console.log(' si hay ')
+            // console.log(' si hay ')
             query.andWhere("ingresos.id_especialidad = :esp", { esp: id_esp })
         }
 
@@ -43,7 +43,7 @@ export class IngresosRepository implements IIngresosRepository {
     }
 
     async findByEspecialidad(id_especialidad: number): Promise<Ingreso[]> {
-        const data = await this.repository.find({ where: { id_especialidad: { id: id_especialidad } } })
+        const data = await this.repository.find({ where: { id_especialidad: { id: id_especialidad }, de_alta: false } })
         return data.map((dbm) => IngresoMapper.toDomain(dbm));
     }
     async save(modelodb: Ingreso): Promise<Ingreso> {
