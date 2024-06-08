@@ -3,6 +3,7 @@
 /node_modules
 /build
 /postgres
+/emqx1_data
 
 # Logs
 logs

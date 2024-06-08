@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 services:
   db:
     image: postgres:11
@@ -32,8 +32,8 @@ services:
       #- 8883:8883 # MQTT/SSL Protocol Port
       - 18083:18083 # Dasboart
       #- 8081:8081 # API Rest
-      # volumes:
-      #   - $PWD/emqx1_data:/opt/emqx/data
+    volumes:
+      - ./emqx1_data:/opt/emqx/data
     networks:
       - app_net
 
