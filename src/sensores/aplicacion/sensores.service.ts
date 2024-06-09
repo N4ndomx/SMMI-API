@@ -127,7 +127,7 @@ export class SensoresDataService {
 
     const grouped = {};
     datarepo.forEach((value) => {
-      const roundedDate = roundToNearestMinutes(new Date(value.fecha_registro.value), { nearestTo: 3 }); // Redondear al intervalo de 15 minutos mas cercano
+      const roundedDate = roundToNearestMinutes(new Date(value.fecha_registro.value), { nearestTo: 5 });
       const key = roundedDate.toISOString();
       if (!grouped[key]) {
         categories.push(roundedDate.toLocaleTimeString());
